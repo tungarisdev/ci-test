@@ -10,7 +10,7 @@ public class HomeController {
         return "Hello from Spring But!";
     }
 @GetMapping("/thai")
-    public String hello() {
+    public String thai() {
         return "Day la nhanh cua thai!";
     }
 
