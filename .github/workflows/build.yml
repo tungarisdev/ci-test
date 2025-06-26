@@ -27,6 +27,3 @@ jobs:
           name: app-war
           path: target/*.war
 
-      - name: Trigger CD on local machine
-        run: |
-          curl -X POST https://aris.id.vn/deploy
