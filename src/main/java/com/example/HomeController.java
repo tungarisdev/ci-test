@@ -9,4 +9,9 @@ public class HomeController {
     public String hello() {
         return "Hello from Spring But!";
     }
+@GetMapping("/thai")
+    public String hello() {
+        return "Day la nhanh cua thai!";
+    }
+
 }
