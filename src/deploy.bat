@@ -28,5 +28,11 @@ for /r %%f in (*.war) do (
 echo === WAR DA COPY. ===
 REM Bạn có thể restart Tomcat bằng cách gọi service, nếu có cài:
 REM net stop Tomcat10 && net start Tomcat10
+echo === KHOI DONG TOMCAT ===
+call D:\Tomcat\apache-tomcat-10.1.25\bin\shutdown.bat
+timeout /t 3 >nul
+call D:\Tomcat\apache-tomcat-10.1.25\bin\startup.bat
 
+echo === DEPLOY HOAN TAT ===
 pause
+

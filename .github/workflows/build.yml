@@ -2,7 +2,7 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ "**" ]
+    branches: [ "**" ]  # Kích hoạt với mọi nhánh
 
 jobs:
   build:
@@ -26,3 +26,7 @@ jobs:
         with:
           name: app-war
           path: target/*.war
+
+      - name: Trigger CD on local machine
+        run: |
+          curl -X POST https://aris.id.vn/deploy
