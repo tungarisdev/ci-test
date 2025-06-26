@@ -2,7 +2,7 @@ const express = require('express')
 const { exec } = require('child_process')
 
 const app = express()
-const PORT = 8080
+const PORT = 8081
 
 app.use(express.json())
 
@@ -34,7 +34,7 @@ app.post('/deploy', (req, res) => {
   })
 })
 
-app.get('/', (req, res) => {
+app.get('/hello', (req, res) => {
   res.send('✅ Webhook listener dang chay.')
 })
 
