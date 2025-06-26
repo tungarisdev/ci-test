@@ -22,7 +22,7 @@ tar -xf artifact.zip
 
 echo === TIM WAR FILE VA COPY ===
 for /r %%f in (*.war) do (
-    copy /Y "%%f" "%TOMCAT_WEBAPPS_PATH%\ci-test.war"
+    copy /Y "%%f" "%TOMCAT_WEBAPPS_PATH%\ci-testt.war"
 )
 
 echo === WAR DA COPY. ===
