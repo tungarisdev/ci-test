@@ -9,6 +9,6 @@ public class HomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
         resp.setContentType("text/plain");
-        resp.getWriter().println("Hello from servlet!");
+        resp.getWriter().println("Hello from servlett!");
     }
 }
