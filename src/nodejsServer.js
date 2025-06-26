@@ -5,26 +5,35 @@ const path = require('path')
 const app = express()
 const PORT = 8080
 
+let isDeploying = false // Cờ để kiểm tra deploy đang chạy hay không
+
 app.use(express.json())
 
 app.post('/deploy', (req, res) => {
-  console.log('Webhook received - starting deploy.bat via CMD...')
+  if (isDeploying) {
+    console.log('[INFO] Deploy request received but deployment is already in progress.')
+    return res.status(429).send('Deployment already in progress. Please wait.')
+  }
 
-  const DEPLOY_DIR = __dirname // Path to folder containing deploy.bat
+  isDeploying = true
+  console.log('[INFO] Deployment triggered. Running deploy.bat...')
 
-  // Use start cmd to run deploy.bat in a new CMD window
-  exec('start cmd /c deploy.bat', { cwd: DEPLOY_DIR }, (error, stdout, stderr) => {
+  const DEPLOY_DIR = __dirname
+  const deployBatPath = path.join(DEPLOY_DIR, 'deploy.bat')
+
+  // Chạy deploy.bat trực tiếp (không mở CMD mới) để kiểm soát tiến trình
+  exec(`"${deployBatPath}"`, { cwd: DEPLOY_DIR }, (error, stdout, stderr) => {
+    isDeploying = false
+
     if (error) {
-      console.error(`Error running deploy.bat: ${error.message}`)
-      return res.status(500).send('Error running deploy.bat')
+      console.error(`[ERROR] Failed to run deploy.bat: ${error.message}`)
+      console.error(`[STDERR]\n${stderr}`)
+      return res.status(500).send('Error during deployment.')
     }
 
-    if (stderr) {
-      console.warn(`stderr:\n${stderr}`)
-    }
-
-    console.log(`CMD started to run deploy.bat`)
-    res.send('CMD started and deploy.bat is running')
+    console.log('[SUCCESS] deploy.bat executed successfully.')
+    console.log(`[STDOUT]\n${stdout}`)
+    res.send('Deployment completed successfully.')
   })
 })
 
@@ -33,5 +42,5 @@ app.get('/hello', (req, res) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`Listening for webhook at http://localhost:${PORT}/deploy`)
+  console.log(`🚀 Listening for webhook at http://localhost:${PORT}/deploy`)
 })
