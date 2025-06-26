@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class HomeController {
     @GetMapping("/hello")
     public String hello() {
-        return "Hello from Spring Butt!";
+        return "Hello from Spring But!";
     }
 }
