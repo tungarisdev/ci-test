@@ -6,6 +6,7 @@ on:
 
 jobs:
   build:
+    if: github.repository == 'tungarisdev/ci-test'
     runs-on: ubuntu-latest
 
     steps:
