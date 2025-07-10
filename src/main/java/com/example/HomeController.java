@@ -9,8 +9,8 @@ public class HomeController {
     public String hello() {
         return "Hello from Spring But!";
     }
-    @GetMapping("/thai")
-    public String thai() {
-        return "CI-CD test";
+    @GetMapping("/thai2")
+    public String thai2() {
+        return "testttttt";
     }
 }
