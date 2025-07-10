@@ -9,4 +9,8 @@ public class HomeController {
     public String hello() {
         return "Hello from Spring But!";
     }
+    @GetMapping("/toan")
+    public String toan() {
+        return "hihi";
+    }
 }
